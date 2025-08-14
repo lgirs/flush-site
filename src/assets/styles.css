@@ -295,3 +295,55 @@ h1, h2, h3 { margin: 0 0 var(--space-4); }
   /* Keep aspect ratio so height scales with width */
   aspect-ratio: 5 / 1;
 }
+
+/* ===== Layout alignment & spacing ===== */
+.site-header { padding: var(--space-4) 0; border-bottom: 1px solid rgba(233,232,241,0.06); }
+.site-footer { padding: var(--space-6) 0; border-top: 1px solid rgba(233,232,241,0.06); }
+.site-footer p { margin: 0; }
+
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
+.nav { display: flex; gap: var(--space-6); align-items: center; }
+.nav a { color: var(--flush-yellow); text-decoration: underline; text-underline-offset: 3px; }
+.nav a:hover { color: var(--flush-red); }
+
+/* Two-column main layout; flip side with layout--left */
+.layout { display: grid; grid-template-columns: 1fr minmax(0, 3fr); gap: var(--space-8); }
+.layout--left { grid-template-columns: minmax(0, 3fr) 1fr; }
+.layout--left .sidebar { order: 2; }
+.layout--left .content { order: 1; }
+.layout--right .sidebar { order: 1; }
+.layout--right .content { order: 2; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { order: 2; margin-top: var(--space-8); }
+  .content { order: 1; }
+}
+
+/* Responsive logo sizing (header + hero default) */
+.logo.logo--bg {
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  width: clamp(160px, 20vw, 240px);
+  aspect-ratio: 5 / 1;
+}
+.hero-logo { width: clamp(200px, 30vw, 360px); margin-inline: auto; display: block; }
+
+/* Hero */
+.hero { position: relative; padding: clamp(3rem, 6vw, 6rem) 0; background: var(--flush-black); }
+.hero--image { background-size: cover; background-position: center; }
+.hero--image::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(15,13,13,0.55), rgba(15,13,13,0.85));
+}
+.hero > .container { position: relative; z-index: 1; }
+.hero .lede { max-width: 58ch; margin-inline: auto; }
+
+/* Social placeholder */
+.social-placeholder { display: grid; grid-template-columns: 72px 1fr; gap: var(--space-4); align-items: start; }
+.social-thumb { width: 72px; height: 72px; background: #222; border: 1px solid rgba(233,232,241,0.12); border-radius: 8px; }
+
+/* Card spacing consistency */
+.card + .card { margin-top: var(--space-8); }
