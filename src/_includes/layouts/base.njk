@@ -29,6 +29,29 @@
     </div>
   </header>
 
+{% if hero_image or hero_title or hero_lede %}
+  <section class="hero {% if hero_image %}hero--image{% endif %}" {% if hero_image %}style="background-image:url('{{ hero_image }}')" {% endif %}>
+    <div class="container center">
+      {% if not hero_image %}
+        <span class="logo logo--bg logo--white hero-logo" aria-label="Flush"></span>
+      {% endif %}
+      {% if hero_title %}
+        <h1 class="mt-8">{{ hero_title }}</h1>
+      {% endif %}
+      {% if hero_lede %}
+        <p class="lede">{{ hero_lede }}</p>
+      {% endif %}
+    </div>
+  </section>
+{% else %}
+  {# Fallback to just the big logo if no hero content set #}
+  <section class="hero">
+    <div class="container center">
+      <span class="logo logo--bg logo--white hero-logo" aria-label="Flush"></span>
+    </div>
+  </section>
+{% endif %}
+
   <!-- Hero (big visual element) -->
   {% include "partials/hero.njk" %}
 
