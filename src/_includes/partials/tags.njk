@@ -1,10 +1,12 @@
-{# Tag cloud / alt navigation. Pulls Eleventy collections by tag. #}
+{# Tag cloud / alt navigation. Works with Nunjucks (no arrow functions). #}
 {% if collections and collections.all %}
+  {% set tagList = collections.all | getAllTags %}
   <div class="card mb-8">
     <h3 class="mb-4">Explore by tag</h3>
-    {% set tagList = collections.all | getUniqueTags | filter(tag => tag != "post") %}
-    {% for tag in tagList | sort %}
-      <a class="tag" href="/tags/{{ tag | slug }}/">{{ tag }}</a>
+    {% for tag in tagList %}
+      {% if tag != "post" and tag != "posts" %}
+        <a class="tag" href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
+      {% endif %}
     {% endfor %}
   </div>
 {% endif %}
