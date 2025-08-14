@@ -1,28 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ title or site.siteName }}</title>
-  <link rel="stylesheet" href="/assets/styles.css" />
-</head>
 <body>
   <header class="site-header">
-    <nav class="nav">
-<a href="/" class="brand logo logo--bg logo--white" aria-label="Flush"></a>
-      <a href="/about/">About</a>
-      <a href="/music/">Music</a>
-      <a href="/gigs/">Gigs</a>
-      <a href="/blog/">Blog</a>
-    </nav>
+    <div class="container header-row">
+      <a href="/" class="brand logo logo--bg logo--white" aria-label="Flush"></a>
+      <nav class="nav">
+        <a href="/about/">About</a>
+        <a href="/music/">Music</a>
+        <a href="/gigs/">Gigs</a>
+        <a href="/blog/">Blog</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    {{ content | safe }}
+  <main>
+    <div class="container">
+      {{ content | safe }}
+    </div>
   </main>
 
   <footer class="site-footer">
-    <p>© {{ site.siteName }}</p>
+    <div class="container">
+      <p>© Flush</p>
+    </div>
   </footer>
 </body>
-</html>
