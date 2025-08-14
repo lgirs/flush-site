@@ -1,12 +1,27 @@
-{# Tag cloud / alt navigation. Works with Nunjucks (no arrow functions). #}
+{# Tag cloud / alt navigation without Eleventy-specific filters. #}
 {% if collections and collections.all %}
-  {% set tagList = collections.all | getAllTags %}
-  <div class="card mb-8">
-    <h3 class="mb-4">Explore by tag</h3>
-    {% for tag in tagList %}
-      {% if tag != "post" and tag != "posts" %}
+  {# Build a unique tag map: { tagName: true } #}
+  {% set tagMap = {} %}
+  {% for item in collections.all %}
+    {% if item.data and item.data.tags %}
+      {% for t in item.data.tags %}
+        {% if t != "post" and t != "posts" %}
+          {% set tagMap = tagMap | merge({ (t): true }) %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  {# Turn the map into a list of [key, value] pairs sorted by key #}
+  {% set tagList = tagMap | dictsort %}
+
+  {% if tagList | length %}
+    <div class="card mb-8">
+      <h3 class="mb-4">Explore by tag</h3>
+      {% for pair in tagList %}
+        {% set tag = pair[0] %}
         <a class="tag" href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
-      {% endif %}
-    {% endfor %}
-  </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 {% endif %}
