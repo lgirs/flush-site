@@ -254,3 +254,27 @@ a:hover { color: var(--flush-red); }
   border-top: 1px solid rgba(233,232,241,0.06);
   border-bottom: 1px solid rgba(233,232,241,0.06);
 }
+/* ===== Layout alignment & spacing tidy-up ===== */
+
+/* Use the container for header/footer too, not fixed paddings */
+.site-header { padding: var(--space-4) 0; border-bottom: 1px solid rgba(233,232,241,0.06); }
+.site-footer { padding: var(--space-6) 0; border-top: 1px solid rgba(233,232,241,0.06); }
+.site-footer p { margin: 0; }
+
+/* Header row: logo left, nav right */
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
+
+/* Nav links: equal spacing, no bounce */
+.nav { display: flex; gap: var(--space-6); align-items: center; }
+.nav a { color: var(--flush-yellow); text-decoration: underline; text-underline-offset: 3px; }
+.nav a:hover { color: var(--flush-red); }
+
+/* Logo sizing so it doesn’t dominate on small screens */
+.logo { width: auto; min-width: 0; }
+.logo.logo--bg { height: 56px; aspect-ratio: auto; background-size: contain; }
+
+/* Main content top spacing so H1 isn't glued to header */
+main { padding: var(--space-8) 0; }
+
+/* Headings: consistent margins in the new grid */
+h1, h2, h3 { margin: 0 0 var(--space-4); }
