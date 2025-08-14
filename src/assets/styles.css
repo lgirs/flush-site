@@ -347,3 +347,44 @@ h1, h2, h3 { margin: 0 0 var(--space-4); }
 
 /* Card spacing consistency */
 .card + .card { margin-top: var(--space-8); }
+
+.hero {
+  position: relative;
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  background: var(--flush-black);
+  text-align: center;
+}
+
+.hero--image {
+  background-size: cover;
+  background-position: center;
+}
+
+.hero--image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,13,13,0.55), rgba(15,13,13,0.85));
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-logo {
+  width: clamp(200px, 30vw, 360px);
+  margin-inline: auto;
+  display: block;
+}
+
+.hero h1 {
+  color: var(--flush-yellow);
+  margin-top: var(--space-4);
+}
+
+.hero p.lede {
+  max-width: 58ch;
+  margin-inline: auto;
+  color: var(--flush-gray);
+}
