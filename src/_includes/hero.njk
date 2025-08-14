@@ -1,0 +1,17 @@
+{# Renders a centered hero with image or logo. Control via page front matter. #}
+<section class="hero {% if hero_image %}hero--image{% endif %}" {% if hero_image %}style="background-image:url('{{ hero_image }}')" {% endif %}>
+  <div class="container center">
+    {% if hero_image %}
+      <div class="hero-media"></div> {# background does the heavy lifting #}
+    {% else %}
+      {# Default to logo if no image provided #}
+      <span class="logo logo--bg logo--white hero-logo" aria-label="Flush"></span>
+    {% endif %}
+    {% if hero_title %}
+      <h1 class="mt-8">{{ hero_title }}</h1>
+    {% endif %}
+    {% if hero_lede %}
+      <p class="lede">{{ hero_lede }}</p>
+    {% endif %}
+  </div>
+</section>
