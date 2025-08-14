@@ -281,3 +281,17 @@ h1, h2, h3 { margin: 0 0 var(--space-4); }
 
 /* Logo image sizing */
 .logo-img { height: 56px; width: auto; display: block; }
+
+/* ===== Responsive logo sizing ===== */
+.logo.logo--bg {
+  display: block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+
+  /* Make width responsive but cap it */
+  width: clamp(160px, 20vw, 240px);
+
+  /* Keep aspect ratio so height scales with width */
+  aspect-ratio: 5 / 1;
+}
