@@ -1,0 +1,10 @@
+{# Tag cloud / alt navigation. Pulls Eleventy collections by tag. #}
+{% if collections and collections.all %}
+  <div class="card mb-8">
+    <h3 class="mb-4">Explore by tag</h3>
+    {% set tagList = collections.all | getUniqueTags | filter(tag => tag != "post") %}
+    {% for tag in tagList | sort %}
+      <a class="tag" href="/tags/{{ tag | slug }}/">{{ tag }}</a>
+    {% endfor %}
+  </div>
+{% endif %}
