@@ -388,3 +388,63 @@ h1, h2, h3 { margin: 0 0 var(--space-4); }
   margin-inline: auto;
   color: var(--flush-gray);
 }
+/* === Layout primitives === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Two-column layout under the hero */
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr; /* sidebar width + content */
+  gap: 32px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+/* Sidebar and cards */
+.sidebar .card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 20px 20px 16px;
+  margin-bottom: 24px;
+}
+
+/* Ensure content column doesn't look squashed */
+.content > *:first-child {
+  margin-top: 0;
+}
+
+/* Hero spacing so it doesn’t push content too far down */
+.hero {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    order: 2;
+  }
+  .content {
+    order: 1;
+  }
+}
+
+/* Optional: tidy up headings in the content area */
+.content h1, .content h2, .content h3 {
+  line-height: 1.1;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+/* Optional: keep long lines readable */
+.content {
+  max-width: 72ch;       /* good reading width */
+}
