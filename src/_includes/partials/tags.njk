@@ -1,6 +1,4 @@
-{# Tag cloud / alt navigation without Eleventy-specific filters #}
-{% if collections and collections.all %}
-  {# Collect all tags into a list #}
+{% raw %}{% if collections and collections.all %}
   {% set allTags = [] %}
   {% for item in collections.all %}
     {% if item.data and item.data.tags %}
@@ -11,16 +9,13 @@
       {% endfor %}
     {% endif %}
   {% endfor %}
-
-  {# Sort the list alphabetically #}
   {% set tagList = allTags | sort %}
-
   {% if tagList | length %}
     <div class="card mb-8">
       <h3 class="mb-4">Explore by tag</h3>
       {% for tag in tagList %}
-        <a class="tag" href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
+        <a class="tag" href="{{ '/tags/' | url }}{{ tag | slugify }}/">{{ tag }}</a>
       {% endfor %}
     </div>
   {% endif %}
-{% endif %}
+{% endif %}{% endraw %}
