@@ -1,5 +1,5 @@
-// .eleventy.js (CommonJS; Eleventy looks for this filename)
-module.exports = function (eleventyConfig) {
+// .eleventy.js — ESM version compatible with "type": "module"
+export default function (eleventyConfig) {
   // Copy /src/assets → /assets in the output
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
@@ -15,4 +15,4 @@ module.exports = function (eleventyConfig) {
       includes: "_includes"
     }
   };
-};
+}
