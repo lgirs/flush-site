@@ -1,4 +1,4 @@
-{% raw %}{% if collections and collections.all %}
+{% if collections and collections.all %}
   {% set allTags = [] %}
   {% for item in collections.all %}
     {% if item.data and item.data.tags %}
@@ -18,4 +18,4 @@
       {% endfor %}
     </div>
   {% endif %}
-{% endif %}{% endraw %}
+{% endif %}
