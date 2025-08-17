@@ -1,17 +1,11 @@
-// .eleventy.js (ESM)
-export default function (eleventyConfig) {
-  // Copy /src/assets → /assets in the output
-  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
-
+// .eleventy.js
+export default function(eleventyConfig) {
+  eleventyConfig.addPassthroughCopy("src/assets");
   return {
+    dir: { input: "src", includes: "_includes", data: "_data", output: "_site" },
+    templateFormats: ["njk", "md", "html"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk",
-    dir: {
-      input: "src",
-      output: "_site",
-      includes: "_includes",
-      layouts: "_includes/layouts"
-    }
+    dataTemplateEngine: "njk"
   };
 }
