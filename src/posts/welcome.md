@@ -1,5 +1,5 @@
 ---
-layout: layouts/base.njk
+layout: base.njk
 title: Welcome
 tags: post
 date: 2025-08-12
