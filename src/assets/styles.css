@@ -256,7 +256,9 @@ a:hover { color: var(--flush-red); }
 }
 /* ===== Layout alignment & spacing tidy-up ===== */
 
-/* Use the container for header/footer too, not fixed paddings */
+/* ===== Layout & Components — consolidated (v1.1) ===== */
+
+/* Header + Footer use container for consistent edges */
 .site-header { padding: var(--space-4) 0; border-bottom: 1px solid rgba(233,232,241,0.06); }
 .site-footer { padding: var(--space-6) 0; border-top: 1px solid rgba(233,232,241,0.06); }
 .site-footer p { margin: 0; }
@@ -264,63 +266,12 @@ a:hover { color: var(--flush-red); }
 /* Header row: logo left, nav right */
 .header-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
 
-/* Nav links: equal spacing, no bounce */
+/* Simple nav */
 .nav { display: flex; gap: var(--space-6); align-items: center; }
 .nav a { color: var(--flush-yellow); text-decoration: underline; text-underline-offset: 3px; }
 .nav a:hover { color: var(--flush-red); }
 
-/* Logo sizing so it doesn’t dominate on small screens */
-.logo { width: auto; min-width: 0; }
-.logo.logo--bg { height: 56px; aspect-ratio: auto; background-size: contain; }
-
-/* Main content top spacing so H1 isn't glued to header */
-main { padding: var(--space-8) 0; }
-
-/* Headings: consistent margins in the new grid */
-h1, h2, h3 { margin: 0 0 var(--space-4); }
-
-/* Logo image sizing */
-.logo-img { height: 56px; width: auto; display: block; }
-
-/* ===== Responsive logo sizing ===== */
-.logo.logo--bg {
-  display: block;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
-
-  /* Make width responsive but cap it */
-  width: clamp(160px, 20vw, 240px);
-
-  /* Keep aspect ratio so height scales with width */
-  aspect-ratio: 5 / 1;
-}
-
-/* ===== Layout alignment & spacing ===== */
-.site-header { padding: var(--space-4) 0; border-bottom: 1px solid rgba(233,232,241,0.06); }
-.site-footer { padding: var(--space-6) 0; border-top: 1px solid rgba(233,232,241,0.06); }
-.site-footer p { margin: 0; }
-
-.header-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
-.nav { display: flex; gap: var(--space-6); align-items: center; }
-.nav a { color: var(--flush-yellow); text-decoration: underline; text-underline-offset: 3px; }
-.nav a:hover { color: var(--flush-red); }
-
-/* Two-column main layout; flip side with layout--left */
-.layout { display: grid; grid-template-columns: 1fr minmax(0, 3fr); gap: var(--space-8); }
-.layout--left { grid-template-columns: minmax(0, 3fr) 1fr; }
-.layout--left .sidebar { order: 2; }
-.layout--left .content { order: 1; }
-.layout--right .sidebar { order: 1; }
-.layout--right .content { order: 2; }
-
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { order: 2; margin-top: var(--space-8); }
-  .content { order: 1; }
-}
-
-/* Responsive logo sizing (header + hero default) */
+/* Logo sizing (header + hero) */
 .logo.logo--bg {
   display: block;
   background-size: contain;
@@ -331,80 +282,18 @@ h1, h2, h3 { margin: 0 0 var(--space-4); }
 }
 .hero-logo { width: clamp(200px, 30vw, 360px); margin-inline: auto; display: block; }
 
-/* Hero */
-.hero { position: relative; padding: clamp(3rem, 6vw, 6rem) 0; background: var(--flush-black); }
-.hero--image { background-size: cover; background-position: center; }
-.hero--image::after {
-  content:''; position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(15,13,13,0.55), rgba(15,13,13,0.85));
-}
-.hero > .container { position: relative; z-index: 1; }
-.hero .lede { max-width: 58ch; margin-inline: auto; }
+/* Main spacing so H1 isn't glued to header */
+main { padding: var(--space-8) 0; }
 
-/* Social placeholder */
-.social-placeholder { display: grid; grid-template-columns: 72px 1fr; gap: var(--space-4); align-items: start; }
-.social-thumb { width: 72px; height: 72px; background: #222; border: 1px solid rgba(233,232,241,0.12); border-radius: 8px; }
-
-/* Card spacing consistency */
-.card + .card { margin-top: var(--space-8); }
-
-.hero {
-  position: relative;
-  padding: clamp(3rem, 6vw, 6rem) 0;
-  background: var(--flush-black);
-  text-align: center;
-}
-
-.hero--image {
-  background-size: cover;
-  background-position: center;
-}
-
-.hero--image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15,13,13,0.55), rgba(15,13,13,0.85));
-}
-
-.hero > .container {
-  position: relative;
-  z-index: 1;
-}
-
-.hero-logo {
-  width: clamp(200px, 30vw, 360px);
-  margin-inline: auto;
-  display: block;
-}
-
-.hero h1 {
-  color: var(--flush-yellow);
-  margin-top: var(--space-4);
-}
-
-.hero p.lede {
-  max-width: 58ch;
-  margin-inline: auto;
-  color: var(--flush-gray);
-}
-/* === Layout primitives === */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* Two-column layout under the hero */
+/* === Two-column main layout (sidebar + content) === */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; } /* keep one definition */
 .layout {
   display: grid;
-  grid-template-columns: 320px 1fr; /* sidebar width + content */
+  grid-template-columns: 320px 1fr;   /* sidebar width + flexible content */
   gap: 32px;
   align-items: start;
   margin-top: 32px;
 }
-
-/* Sidebar and cards */
 .sidebar .card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -412,39 +301,40 @@ h1, h2, h3 { margin: 0 0 var(--space-4); }
   padding: 20px 20px 16px;
   margin-bottom: 24px;
 }
+.content { max-width: 72ch; } /* good reading width */
+.content > *:first-child { margin-top: 0; }
+.content h1, .content h2, .content h3 { line-height: 1.1; margin-top: 24px; margin-bottom: 12px; }
 
-/* Ensure content column doesn't look squashed */
-.content > *:first-child {
-  margin-top: 0;
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { order: 2; margin-top: var(--space-8); }
+  .content { order: 1; }
 }
 
-/* Hero spacing so it doesn’t push content too far down */
+/* === Hero (single source of truth) === */
 .hero {
+  position: relative;
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  background: var(--flush-black);
+  text-align: center;
   margin-top: 24px;
   margin-bottom: 8px;
 }
-
-/* Responsive: stack columns on small screens */
-@media (max-width: 960px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-  .sidebar {
-    order: 2;
-  }
-  .content {
-    order: 1;
-  }
+.hero--image { background-size: cover; background-position: center; }
+.hero--image::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,13,13,0.55), rgba(15,13,13,0.85));
+  pointer-events: none;
 }
+.hero > .container { position: relative; z-index: 1; }
+.hero h1 { color: var(--flush-yellow); margin-top: var(--space-4); }
+.hero p.lede { max-width: 58ch; margin-inline: auto; color: var(--flush-gray); }
 
-/* Optional: tidy up headings in the content area */
-.content h1, .content h2, .content h3 {
-  line-height: 1.1;
-  margin-top: 24px;
-  margin-bottom: 12px;
-}
+/* === Social placeholder (kept minimal) === */
+.social-placeholder { display: grid; grid-template-columns: 72px 1fr; gap: var(--space-4); align-items: start; }
+.social-thumb { width: 72px; height: 72px; background: #222; border: 1px solid rgba(233,232,241,0.12); border-radius: 8px; }
 
-/* Optional: keep long lines readable */
-.content {
-  max-width: 72ch;       /* good reading width */
-}
+/* Card spacing consistency */
+.card + .card { margin-top: var(--space-8); }
+
