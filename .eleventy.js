@@ -1,4 +1,4 @@
-// .eleventy.js — ESM version compatible with "type": "module"
+// .eleventy.js — ESM config for Eleventy 2.x
 export default function (eleventyConfig) {
   // Copy /src/assets → /assets in the output
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
@@ -8,11 +8,13 @@ export default function (eleventyConfig) {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
-    // Explicit input and includes paths (important for CI)
+
+    // Required dir settings
     dir: {
       input: "src",
-      output: "_site",
-      includes: "src/_includes"
+      includes: "_includes",
+      data: "_data",
+      output: "_site"
     }
   };
 }
