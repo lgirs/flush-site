@@ -1,41 +1,41 @@
-<!DOCTYPE html>
+{% raw %}<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ title or site.siteName }}</title>
+  <title>{{ title or site.siteName or "Flush" }}</title>
 
-  <!-- Fonts per spec -->
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts (Oswald + Source Sans Pro) -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Main stylesheet (asset-safe path) -->
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
-    <div class="container">
-      <a class="site-title" href="{{ '/' | url }}">{{ site.siteName }}</a>
-      {% if site.nav %}
-      <nav class="site-nav" aria-label="Main">
-        <ul>
-          {% for item in site.nav %}
-            {# Expecting items like { "title": "About", "url": "/about/" } #}
-            <li><a href="{{ item.url | url }}">{{ item.title }}</a></li>
-          {% endfor %}
-        </ul>
+    <div class="container header-row">
+      <a href="{{ '/' | url }}" class="brand logo logo--bg logo--white" aria-label="Flush"></a>
+      <nav class="nav">
+        <a href="{{ '/about/' | url }}">About</a>
+        <a href="{{ '/music/' | url }}">Music</a>
+        <a href="{{ '/gigs/' | url }}">Gigs</a>
+        <a href="{{ '/blog/' | url }}">Blog</a>
       </nav>
-      {% endif %}
     </div>
   </header>
 
-  <!-- Hero (optional, controlled by page front matter) -->
+  <!-- Hero partial (valid) -->
   {% include "partials/hero.njk" %}
 
-  <!-- Main content -->
-  <main id="main-content" class="site-main">
-    <div class="container">
+  <!-- Main two-column layout -->
+  <main class="section">
+    <div class="container layout {% if page.data.sidebar == 'left' %}layout--left{% else %}layout--right{% endif %}">
+      <aside class="sidebar">
+        {% include "partials/tags.njk" ignore missing %}
+        {% include "partials/social.njk" ignore missing %}
+      </aside>
       <article class="content">
         {{ content | safe }}
       </article>
@@ -46,18 +46,8 @@
   <footer class="site-footer">
     <div class="container">
       <p>© Flush · <a href="mailto:contact@flush.rocks">contact@flush.rocks</a></p>
-      <nav class="site-footer-nav" aria-label="Footer">
-        <ul>
-          {# Add footer links here as needed, using asset-safe URLs #}
-          {# Example:
-          <li><a href="{{ '/about/' | url }}">About</a></li>
-          <li><a href="{{ '/gigs/' | url }}">Gigs</a></li>
-          <li><a href="{{ '/tags/' | url }}">Tags</a></li>
-          #}
-        </ul>
-      </nav>
     </div>
   </footer>
 
 </body>
-</html>
+</html>{% endraw %}
