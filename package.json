@@ -2,11 +2,14 @@
   "name": "flush-site",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
+  "engines": { "node": "22.x" },
+  "packageManager": "npm@10.9.3",
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "start": "eleventy --serve"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "2.0.1"
   }
 }
