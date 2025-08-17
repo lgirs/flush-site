@@ -1,10 +1,10 @@
-{# Renders a centered hero with image or logo. Controlled via page front matter. #}
-<section class="hero {% if hero_image %}hero--image{% endif %}" {% if hero_image %}style="background-image:url('{{ hero_image }}')" {% endif %}>
+{# Renders a centered hero with optional background image, controlled via page front matter. #}
+<section
+  class="hero{% if hero_image %} hero--image{% endif %}"
+  {% if hero_image %}style="background-image:url('{{ hero_image | url }}')" {% endif %}>
   <div class="container center">
-    {% if hero_image %}
-      {# Background image is applied via the inline style above #}
-    {% else %}
-      {# Fallback to big logo when no hero image is set #}
+    {% if not hero_image %}
+      {# Fallback: big logo when no hero image is set #}
       <span class="logo logo--bg logo--white hero-logo" aria-label="Flush"></span>
     {% endif %}
 
