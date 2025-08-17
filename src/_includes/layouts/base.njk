@@ -6,65 +6,36 @@
   <title>{{ title or site.siteName }}</title>
 
   <!-- Fonts per spec -->
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/assets/styles.css" />
+  <!-- Main stylesheet (asset-safe path) -->
+  <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
 </head>
 <body>
 
   <!-- Header -->
   <header class="site-header">
-    <div class="container header-row">
-      <!-- Logo link home -->
-      <a href="/" class="brand logo logo--bg logo--white" aria-label="Flush"></a>
-
-      <!-- Top nav -->
-      <nav class="nav">
-        <a href="/about/">About</a>
-        <a href="/music/">Music</a>
-        <a href="/gigs/">Gigs</a>
-        <a href="/blog/">Blog</a>
+    <div class="container">
+      <a class="site-title" href="{{ '/' | url }}">{{ site.siteName }}</a>
+      {% if site.nav %}
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          {% for item in site.nav %}
+            {# Expecting items like { "title": "About", "url": "/about/" } #}
+            <li><a href="{{ item.url | url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
       </nav>
+      {% endif %}
     </div>
   </header>
 
-{% if hero_image or hero_title or hero_lede %}
-  <section class="hero {% if hero_image %}hero--image{% endif %}" {% if hero_image %}style="background-image:url('{{ hero_image }}')" {% endif %}>
-    <div class="container center">
-      {% if not hero_image %}
-        <span class="logo logo--bg logo--white hero-logo" aria-label="Flush"></span>
-      {% endif %}
-      {% if hero_title %}
-        <h1 class="mt-8">{{ hero_title }}</h1>
-      {% endif %}
-      {% if hero_lede %}
-        <p class="lede">{{ hero_lede }}</p>
-      {% endif %}
-    </div>
-  </section>
-{% else %}
-  {# Fallback to just the big logo if no hero content set #}
-  <section class="hero">
-    <div class="container center">
-      <span class="logo logo--bg logo--white hero-logo" aria-label="Flush"></span>
-    </div>
-  </section>
-{% endif %}
-
-  <!-- Hero (big visual element) -->
+  <!-- Hero (optional, controlled by page front matter) -->
   {% include "partials/hero.njk" %}
 
-  <!-- Main 2‑column layout (sidebar side controllable) -->
-  <main class="section">
-    <div class="container layout {% if page.data.sidebar == 'left' %}layout--left{% else %}layout--right{% endif %}">
-      <!-- Sidebar (tags + social) -->
-      <aside class="sidebar">
-        {% include "partials/tags.njk" %}
-        {% include "partials/social.njk" %}
-      </aside>
-
-      <!-- Page content -->
+  <!-- Main content -->
+  <main id="main-content" class="site-main">
+    <div class="container">
       <article class="content">
         {{ content | safe }}
       </article>
@@ -75,6 +46,16 @@
   <footer class="site-footer">
     <div class="container">
       <p>© Flush · <a href="mailto:contact@flush.rocks">contact@flush.rocks</a></p>
+      <nav class="site-footer-nav" aria-label="Footer">
+        <ul>
+          {# Add footer links here as needed, using asset-safe URLs #}
+          {# Example:
+          <li><a href="{{ '/about/' | url }}">About</a></li>
+          <li><a href="{{ '/gigs/' | url }}">Gigs</a></li>
+          <li><a href="{{ '/tags/' | url }}">Tags</a></li>
+          #}
+        </ul>
+      </nav>
     </div>
   </footer>
 
