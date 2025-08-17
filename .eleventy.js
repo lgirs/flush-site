@@ -8,11 +8,11 @@ export default function (eleventyConfig) {
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
-    // Tell Eleventy our input dir is /src (this is the key bit)
+    // Explicit input and includes paths (important for CI)
     dir: {
       input: "src",
       output: "_site",
-      includes: "_includes"
+      includes: "src/_includes"
     }
   };
 }
