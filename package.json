@@ -6,7 +6,7 @@
   "engines": { "node": "22.x" },
   "packageManager": "npm@10.9.3",
   "scripts": {
-    "build": "eleventy --input=src --output=_site",
+    "build": "eleventy --input=src --output=_site && mkdir -p _site/assets && cp -R src/assets/. _site/assets/",
     "start": "eleventy --serve --input=src --output=_site"
   },
   "devDependencies": {
