@@ -1,6 +1,10 @@
-// .eleventy.js — ESM, explicitly sets dirs and passthrough
+// .eleventy.js — ESM, explicit dirs, explicit passthrough for assets
 export default function (eleventyConfig) {
+  // Copy the entire /src/assets folder to /assets in the output
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+
+  // Optional: watch CSS so local dev picks up changes immediately
+  eleventyConfig.addWatchTarget("src/assets/styles.css");
 
   return {
     markdownTemplateEngine: "njk",
