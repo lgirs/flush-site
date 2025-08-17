@@ -1,21 +1,11 @@
-{% if collections and collections.all %}
-  {% set allTags = [] %}
-  {% for item in collections.all %}
-    {% if item.data and item.data.tags %}
-      {% for t in item.data.tags %}
-        {% if t != "post" and t != "posts" and not (t in allTags) %}
-          {% set allTags = allTags.append(t) %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-  {% endfor %}
-  {% set tagList = allTags | sort %}
-  {% if tagList | length %}
-    <div class="card mb-8">
-      <h3 class="mb-4">Explore by tag</h3>
-      {% for tag in tagList %}
-        <a class="tag" href="{{ '/tags/' | url }}{{ tag | slugify }}/">{{ tag }}</a>
-      {% endfor %}
-    </div>
-  {% endif %}
+{# Sidebar tag list using Eleventy collections object keys. #}
+{% if collections %}
+  <div class="card mb-8">
+    <h3 class="mb-4">Explore by tag</h3>
+    {% for name, items in collections %}
+      {% if name != "all" and name != "post" and name != "posts" %}
+        <a class="tag" href="{{ '/tags/' | url }}{{ name | slugify }}/">{{ name }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endif %}
