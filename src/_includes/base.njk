@@ -29,18 +29,23 @@
   <!-- Hero partial (valid) -->
   {% include "partials/hero.njk" %}
 
-  <!-- Main two-column layout -->
-  <main class="section">
-    <div class="container layout {% if page.data.sidebar == 'left' %}layout--left{% else %}layout--right{% endif %}">
-      <aside class="sidebar">
-        {% include "partials/tags.njk" ignore missing %}
-        {% include "partials/social.njk" ignore missing %}
-      </aside>
-      <article class="content">
-        {{ content | safe }}
-      </article>
-    </div>
-  </main>
+<main class="main">
+  {# HERO ON TOP #}
+  {% include "partials/hero.njk" %}
+
+  {# TWO-COLUMN LAYOUT: SIDEBAR (LEFT) + CONTENT (RIGHT) #}
+  <div class="container layout">
+    <aside class="sidebar">
+      {% include "partials/tags.njk" ignore missing %}
+      {% include "partials/social.njk" ignore missing %}
+    </aside>
+
+    <section class="content">
+      {{ content | safe }}
+    </section>
+  </div>
+</main>
+
 
   <!-- Footer -->
   <footer class="site-footer">
