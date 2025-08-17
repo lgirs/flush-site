@@ -1,4 +1,5 @@
-module.exports = function (eleventyConfig) {
+// .eleventy.js (ESM)
+export default function (eleventyConfig) {
   // Copy /src/assets → /assets in the output
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
@@ -13,4 +14,4 @@ module.exports = function (eleventyConfig) {
       layouts: "_includes/layouts"
     }
   };
-};
+}
