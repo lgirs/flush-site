@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": { "node": "22.x" },
-  "packageManager": "npm@10.9.3",
   "scripts": {
-    "dev": "eleventy --serve --input=src --output=_site",
-    "build": "eleventy --input=src --output=_site && mkdir -p _site/assets && cp -R src/assets/. _site/assets/"
+    "build": "eleventy --input=src --output=_site",
+    "dev": "eleventy --serve --input=src --output=_site"
   },
   "devDependencies": {
     "@11ty/eleventy": "2.0.1"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

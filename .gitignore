@@ -1,14 +1,3 @@
-# Node & builds
 node_modules/
 _site/
-.cache/
-.npm/
-*.log
-
-# OS cruft
 .DS_Store
-Thumbs.db
-
-# Editor settings
-.vscode/
-.idea/
