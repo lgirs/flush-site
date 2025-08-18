@@ -147,3 +147,58 @@ a:hover { color: var(--flush-red); }
 .center { text-align: center; }
 .mt-8 { margin-top: var(--space-8); }
 .mb-8 { margin-bottom: var(--space-8); }
+
+/* ==== LAYOUT v2 (override) =========================================== */
+
+/* Container stays; we re-affirm it here to ensure consistent edges */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Two-column grid: CONTENT (left) + TAG SIDEBAR (right) */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px; /* flexible content + fixed sidebar */
+  gap: 32px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+/* Center the reading column within its grid track and keep line length comfortable */
+.content {
+  max-width: 72ch;
+  justify-self: center;              /* centers content in its column */
+}
+
+/* Sidebar presentation + stickiness for nicer scanning on desktop */
+.sidebar { position: sticky; top: 24px; align-self: start; }
+.sidebar .card {
+  background: #141212;
+  border: 1px solid rgba(233,232,241,0.12);
+  border-radius: 14px;
+  padding: 20px 20px 16px;
+  margin-bottom: 24px;
+}
+
+/* Hero spacing single source of truth */
+.hero { margin-top: 16px; margin-bottom: 8px; }
+
+/* Tags look: white-by-default, yellow only on hover (brand) */
+.tag {
+  color: var(--flush-gray);
+  border-color: var(--flush-gray);
+}
+.tag:hover { background: rgba(255,255,255,0.08); color: var(--flush-yellow); border-color: var(--flush-yellow); }
+
+/* Navigation uses Oswald and white text; yellow only on hover */
+.nav { font-family: var(--font-head); }
+.nav a { color: var(--flush-gray); text-transform: uppercase; }
+.nav a:hover { color: var(--flush-yellow); }
+
+/* Social block stays below main content on Home */
+.social-placeholder { margin-top: 24px; }
+
+/* Mobile: stack with content first, tags second */
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+  .content { justify-self: stretch; }
+  .sidebar { position: static; margin-top: 24px; }
+}
