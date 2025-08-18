@@ -1,5 +1,6 @@
-// .eleventy.js
+// .eleventy.js  (ESM)
 export default function (eleventyConfig) {
+  // Copy assets to /_site/assets
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
   return {
