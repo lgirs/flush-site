@@ -282,3 +282,51 @@ a:hover { color: var(--flush-red); }
 body, h1, h2, h3, .nav a, .tag { color: var(--flush-gray); }
 .nav a:hover, .tag:hover { color: var(--flush-yellow); border-color: var(--flush-yellow); }
 .tag { border: 1px solid var(--flush-gray); }
+
+/* ===== FRAME + HEADER + HERO + GRID (hard lock) ===== */
+:root { --site-max: 1040px; } /* adjust to 1000/1120 later if you prefer */
+
+/* 1) Frame: center the header, hero, main grid, and footer uniformly */
+.site-header .header-row,
+.hero > .container,
+.layout,
+.site-footer .container {
+  max-width: var(--site-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* 2) Header: logo + nav alignment inside the frame */
+.site-header { padding: 16px 0; border-bottom: 1px solid rgba(233,232,241,0.10); }
+.header-row { display: flex; align-items: center; gap: 24px; }
+.header-row .logo { flex: 0 0 auto; }
+.nav { margin-left: auto; display: flex; gap: 20px; font-family: var(--font-head); }
+.site-header .logo-img { height: 40px !important; width: auto !important; }
+
+/* 3) Hero: make it read as a section (visible but compact) */
+.hero {
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 !important;
+  border-bottom: 1px solid rgba(233,232,241,0.08);
+}
+.hero h1 { margin-bottom: 12px; }
+.hero p.lede { max-width: 60ch; }
+
+/* 4) Main grid: centered reading column + fixed right sidebar */
+.layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 280px !important; /* content + sidebar */
+  gap: 28px !important;
+  align-items: start !important;
+  margin-top: 28px !important;
+}
+.content { max-width: 72ch; justify-self: center; }
+.sidebar { position: sticky; top: 24px; }
+.sidebar .card { width: 100%; background: #141212; border: 1px solid rgba(233,232,241,0.12); border-radius: 14px; padding: 20px; }
+
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr !important; }
+  .content { justify-self: stretch; }
+  .sidebar { position: static; margin-top: 24px; }
+}
