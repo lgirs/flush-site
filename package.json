@@ -1,0 +1,16 @@
+{
+  "name": "flush-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy --input=src --output=_site",
+    "dev": "eleventy --serve --input=src --output=_site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "2.0.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
