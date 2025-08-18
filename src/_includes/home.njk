@@ -1,48 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ title or site.name }}</title>
-<link href="{{ '/assets/styles.css?v=20250818a' | url }}" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or site.siteName or "Flush" }}</title>
+
+  {# Single clean stylesheet with cache-bust #}
+  <link href="{{ '/assets/styles.css?v=clean3' | url }}" rel="stylesheet">
 </head>
 <body>
-  <header class="site-header">
+  <!-- Header: centered frame, logo left, nav right -->
+  <header class="site-header" role="banner">
     <div class="container header-row">
       <a href="{{ '/' | url }}" class="logo" aria-label="Flush">
-        <img src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush" class="logo-img">
+        <img class="logo-img" src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush">
       </a>
-      <nav class="nav">
-        <a href="{{ '/gigs/' | url }}">Gigs</a>
-        <a href="{{ '/music/' | url }}">Music</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="{{ '/gigs/'   | url }}">Gigs</a>
+        <a href="{{ '/music/'  | url }}">Music</a>
         <a href="{{ '/videos/' | url }}">Videos</a>
-        <a href="{{ '/about/' | url }}">About</a>
+        <a href="{{ '/about/'  | url }}">About</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    {% include "partials/hero.njk" %}
-    <div class="container layout">
-      <section class="content">
-        {{ content | safe }}
+  <main id="main" role="main">
+    {# HERO (single centered block). Uses your existing partial if set. #}
+    {% if hero_image or hero_title or hero_lede %}
+      {% include "partials/hero.njk" ignore missing %}
+    {% endif %}
 
-        <div class="card social-placeholder mt-8">
-          <div class="social-thumb"></div>
-          <div>
-            <p>Social feed placeholder (Facebook / Instagram)</p>
-          </div>
-        </div>
-      </section>
+    {# BODY CONTENT (single centered block) #}
+    <section class="container">
+      {{ content | safe }}
+    </section>
 
-      <aside class="sidebar">
+    {# SOCIAL FEED (single centered block) #}
+    <section class="container mt-8" aria-labelledby="social-heading">
+      <h2 id="social-heading" class="center">Latest from Social</h2>
+      <div class="card social-placeholder mt-8">
+        <div class="social-thumb" aria-hidden="true"></div>
+        <p>Social feed placeholder (Facebook / Instagram)</p>
+      </div>
+    </section>
+
+    {# TAG WORD-CLOUD (single centered block) #}
+    <section class="container mt-8" aria-labelledby="tags-heading">
+      <h2 id="tags-heading" class="center">Explore Site Content by Tags</h2>
+      <div class="mt-8">
         {% include "partials/tags.njk" ignore missing %}
-      </aside>
-    </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer">
+  <!-- Footer (same centered frame) -->
+  <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <p>Contact: flushrock@gmail.com</p>
+      <p>&copy; {{ site.name or "Flush" }} {{ site.year or "" }}</p>
     </div>
   </footer>
 </body>
