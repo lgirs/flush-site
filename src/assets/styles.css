@@ -95,21 +95,34 @@ h3 { font-size: var(--fs-lg); }
   padding: 16px 0;
   border-bottom: 1px solid var(--line);
 }
-.header-row {
+
+/* Constrain header row within the same site frame as main content */
+.site-header .container {
+  max-width: var(--site-max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
   display: flex;
   align-items: center;
+  justify-content: space-between; /* logo left, nav right */
   gap: 20px;
 }
-.logo-img { height: 40px; width: auto; display: block; } /* adjust to 32/48 if you prefer */
+
+.site-header .logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
 .nav {
-  margin-left: auto;
   display: flex;
   gap: 20px;
   font-family: var(--font-head);
   text-transform: uppercase;
 }
+
 .nav a { color: var(--flush-white); }
 .nav a:hover { color: var(--flush-yellow); }
+
 
 /* ----------------------------
    Hero
