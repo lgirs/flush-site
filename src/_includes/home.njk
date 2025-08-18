@@ -1,63 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ title or site.siteName or "Flush" }}</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {# Single clean stylesheet with cache-bust #}
-  <link href="{{ '/assets/styles.css?v=clean3' | url }}" rel="stylesheet">
-</head>
-<body>
-  <!-- Header: centered frame, logo left, nav right -->
-  <header class="site-header" role="banner">
-    <div class="container header-row">
-      <a href="{{ '/' | url }}" class="logo" aria-label="Flush">
-        <img class="logo-img" src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush">
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="{{ '/gigs/'   | url }}">Gigs</a>
-        <a href="{{ '/music/'  | url }}">Music</a>
-        <a href="{{ '/videos/' | url }}">Videos</a>
-        <a href="{{ '/about/'  | url }}">About</a>
-      </nav>
-    </div>
-  </header>
+    <title>{{ title or site.title }}</title>
 
-  <main id="main" role="main">
-    {# HERO (single centered block). Uses your existing partial if set. #}
-    {% if hero_image or hero_title or hero_lede %}
-      {% include "partials/hero.njk" ignore missing %}
+    {# Fonts: Oswald (headings/nav/tags) + Source Sans Pro (body) #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+    {# Styles (cache-bust: bump the `v=` value when CSS changes) #}
+    <link href="{{ '/assets/styles.css?v=clean2' | url }}" rel="stylesheet">
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <a class="logo" href="/">
+          <img class="logo-img" src="{{ '/assets/images/brand/logo-flush-white.png' | url }}" alt="Flush">
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="/gigs/"   {% if page.url and page.url.startsWith('/gigs/') %}aria-current="page"{% endif %}>Gigs</a>
+          <a href="/music/"  {% if page.url and page.url.startsWith('/music/') %}aria-current="page"{% endif %}>Music</a>
+          <a href="/videos/" {% if page.url and page.url.startsWith('/videos/') %}aria-current="page"{% endif %}>Videos</a>
+          <a href="/about/"  {% if page.url and page.url.startsWith('/about/') %}aria-current="page"{% endif %}>About</a>
+        </nav>
+      </div>
+    </header>
+
+    {# Hero (only renders if data exists) #}
+    {% if hero_title or hero_lede or hero_image %}
+      {% include "partials/hero.njk" %}
     {% endif %}
 
-    {# BODY CONTENT (single centered block) #}
-    <section class="container">
-      {{ content | safe }}
-    </section>
+    <main>
+      <div class="container">
+        <section class="content">
+          {{ content | safe }}
+        </section>
 
-    {# SOCIAL FEED (single centered block) #}
-    <section class="container mt-8" aria-labelledby="social-heading">
-      <h2 id="social-heading" class="center">Latest from Social</h2>
-      <div class="card social-placeholder mt-8">
-        <div class="social-thumb" aria-hidden="true"></div>
-        <p>Social feed placeholder (Facebook / Instagram)</p>
+        <section class="social">
+          <h2 class="center">Latest from Social</h2>
+          <div class="mt-8" role="region" aria-label="Social feed placeholder">
+            <p class="center">Social feed placeholder (Facebook / Instagram)</p>
+          </div>
+        </section>
+
+        <section class="tags-block" aria-label="Explore by tags">
+          {% include "partials/tags.njk" %}
+        </section>
       </div>
-    </section>
+    </main>
 
-    {# TAG WORD-CLOUD (single centered block) #}
-    <section class="container mt-8" aria-labelledby="tags-heading">
-      <h2 id="tags-heading" class="center">Explore Site Content by Tags</h2>
-      <div class="mt-8">
-        {% include "partials/tags.njk" ignore missing %}
+    <footer class="site-footer">
+      <div class="container">
+        <p>© Flush {{ site.year }}</p>
       </div>
-    </section>
-  </main>
-
-  <!-- Footer (same centered frame) -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <p>&copy; {{ site.name or "Flush" }} {{ site.year or "" }}</p>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>
