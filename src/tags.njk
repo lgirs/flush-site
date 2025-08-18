@@ -15,9 +15,6 @@ eleventyExcludeFromCollections: true
   {% for page in taggedPages %}
     <li>
       <a href="{{ page.url | url }}">{{ page.data.title or page.url }}</a>
-      {% if page.date %}
-        <span class="small"> ({{ page.date | date("yyyy-MM-dd") }})</span>
-      {% endif %}
     </li>
   {% endfor %}
 </ul>
