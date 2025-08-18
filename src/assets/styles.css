@@ -3,6 +3,7 @@
    Task 1: Tokens & Base
    Task 2: Frame & Utilities
    Task 3: Header
+   Task 4: Hero
    ========================================= */
 
 /* ---------- Global Tokens ---------- */
@@ -105,4 +106,33 @@ a:focus {
 .nav a:focus {
   color: var(--color-accent);
   text-decoration: underline;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: calc(var(--gap) * 2) 0;
+  background: var(--color-bg);
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.hero .lede {
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.4;
+  margin-top: 1rem;
+  color: var(--color-text);
+}
+
+.hero img {
+  margin-top: var(--gap);
+  max-width: 100%;
+  height: auto;
 }
