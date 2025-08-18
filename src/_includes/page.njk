@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ title or site.name }}</title>
-<link href="{{ '/assets/styles.css?v=20250818a' | url }}" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or site.siteName or "Flush" }}</title>
+
+  <link href="{{ '/assets/styles.css?v=clean3' | url }}" rel="stylesheet">
 </head>
 <body>
-  <header class="site-header">
+  <!-- Header: centered frame, logo left, nav right -->
+  <header class="site-header" role="banner">
     <div class="container header-row">
       <a href="{{ '/' | url }}" class="logo" aria-label="Flush">
-        <img src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush" class="logo-img">
+        <img class="logo-img" src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush">
       </a>
-      <nav class="nav">
-        <a href="{{ '/gigs/' | url }}">Gigs</a>
-        <a href="{{ '/music/' | url }}">Music</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="{{ '/gigs/'   | url }}">Gigs</a>
+        <a href="{{ '/music/'  | url }}">Music</a>
         <a href="{{ '/videos/' | url }}">Videos</a>
-        <a href="{{ '/about/' | url }}">About</a>
+        <a href="{{ '/about/'  | url }}">About</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <div class="container layout">
-      <section class="content">
-        {{ content | safe }}
-      </section>
+  <main id="main" role="main">
+    {# BODY CONTENT (single centered block) #}
+    <section class="container">
+      {{ content | safe }}
+    </section>
 
-      <aside class="sidebar">
+    {# TAG WORD-CLOUD (single centered block) #}
+    <section class="container mt-8" aria-labelledby="tags-heading">
+      <h2 id="tags-heading" class="center">Explore by Tags</h2>
+      <div class="mt-8">
         {% include "partials/tags.njk" ignore missing %}
-      </aside>
-    </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <p>&copy; {{ site.name }} {{ site.year }}</p>
+      <p>&copy; {{ site.name or "Flush" }} {{ site.year or "" }}</p>
     </div>
   </footer>
 </body>
