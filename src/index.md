@@ -1,6 +1,8 @@
 ---
 layout: home.njk
 title: Home
+hero_title: Welcome Friend
+hero_lede: This is the Flush community home
 ---
 
 {% if site.showSplash %}
