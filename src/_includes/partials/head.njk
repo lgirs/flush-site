@@ -1,0 +1,12 @@
+{# src/_includes/partials/head.njk #}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ title or site.siteName or "Flush" }}</title>
+
+{# Google Fonts: Oswald 700 + Source Sans Pro 400/600 #}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+{# Single stylesheet with cache-bust; bump the v= string when you change CSS #}
+<link href="{{ '/assets/styles.css?v=stable1' | url }}" rel="stylesheet">
