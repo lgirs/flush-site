@@ -32,16 +32,20 @@ body {
 
 img { max-width: 100%; height: auto; display: block; }
 
-/* Headings/Nav/Tags use Oswald 700; body stays Source Sans Pro */
+/* Headings/Nav/Tags use Oswald 700; body uses Source Sans Pro */
 h1, h2, h3, h4, h5, h6,
 .nav, .nav a,
 .tag-chip {
   font-family: var(--font-heading);
-  font-weight: 700;             /* matches the weight we load */
+  font-weight: 700;        /* matches the Oswald 700 we load in <head> */
   color: var(--color-text);
   margin: 0 0 0.75rem 0;
   line-height: 1.15;
 }
+
+/* Body already uses var(--font-body) via the Base rules */
+strong, b { font-weight: 600; } /* uses the 600 weight of Source Sans we load */
+
 
 /* Body already uses var(--font-body) via the Base rules */
 strong, b { font-weight: 600; }  /* uses the 600 weight we load for Source Sans Pro */
