@@ -1,6 +1,7 @@
 /* =========================================
    Flush Site Stylesheet
    Task 1: Tokens & Base
+   Task 2: Frame & Utilities
    ========================================= */
 
 /* ---------- Global Tokens ---------- */
@@ -50,4 +51,24 @@ a:focus {
 a:focus {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+/* ---------- Frame ---------- */
+.container {
+  max-width: var(--site-max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* ---------- Utilities ---------- */
+.mt-8 {
+  margin-top: var(--gap);
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.center {
+  text-align: center;
 }
