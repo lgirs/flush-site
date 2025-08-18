@@ -1,9 +1,15 @@
-{# Collect all tags Eleventy knows about and render as chips #}
-{% set tagList = collections.all | eleventyComputed.collections.all | default([]) %}
-{% set allTags = collections | keys | filter(tag => tag != 'all' and tag != 'posts' and tag != 'tagList') %}
+{# src/_includes/partials/tags.njk #}
+{# Render all collection names as tag chips, excluding Eleventy internals #}
+
+{% set exclude = ['all', 'posts', 'tagList'] %}
 
 <div class="tags-block" aria-label="Tags">
-  {% for tag in allTags | sort %}
-    <a class="tag-chip" href="/tags/{{ tag | slug }}/" title="See {{ tag }} content">{{ tag }}</a>
+  {# Nunjucks can iterate over object keys with `for key, value in obj` #}
+  {% for tag, items in collections %}
+    {% if tag not in exclude %}
+      <a class="tag-chip" href="/tags/{{ tag | slug }}/" title="See {{ tag }} content">
+        {{ tag }}
+      </a>
+    {% endif %}
   {% endfor %}
 </div>
