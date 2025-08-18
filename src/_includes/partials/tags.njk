@@ -1,11 +1,9 @@
-{# Sidebar tag list using Eleventy collections object keys. #}
-{% if collections %}
-  <div class="card mb-8">
-    <h3 class="mb-4">Explore site content by tags</h3>
-    {% for name, items in collections %}
-      {% if name != "all" and name != "post" and name != "posts" %}
-        <a class="tag" href="{{ '/tags/' | url }}{{ name | slugify }}/">{{ name }}</a>
-      {% endif %}
-    {% endfor %}
-  </div>
-{% endif %}
+{# Collect all tags Eleventy knows about and render as chips #}
+{% set tagList = collections.all | eleventyComputed.collections.all | default([]) %}
+{% set allTags = collections | keys | filter(tag => tag != 'all' and tag != 'posts' and tag != 'tagList') %}
+
+<div class="tags-block" aria-label="Tags">
+  {% for tag in allTags | sort %}
+    <a class="tag-chip" href="/tags/{{ tag | slug }}/" title="See {{ tag }} content">{{ tag }}</a>
+  {% endfor %}
+</div>
