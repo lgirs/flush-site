@@ -32,13 +32,20 @@ body {
 
 img { max-width: 100%; height: auto; display: block; }
 
-/* Global heading styles to ensure Oswald is used everywhere */
-h1, h2, h3, h4, h5, h6 {
+/* Headings/Nav/Tags use Oswald 700; body stays Source Sans Pro */
+h1, h2, h3, h4, h5, h6,
+.nav, .nav a,
+.tag-chip {
   font-family: var(--font-heading);
+  font-weight: 700;             /* matches the weight we load */
   color: var(--color-text);
   margin: 0 0 0.75rem 0;
   line-height: 1.15;
 }
+
+/* Body already uses var(--font-body) via the Base rules */
+strong, b { font-weight: 600; }  /* uses the 600 weight we load for Source Sans Pro */
+
 
 /* Default sizes (hero h1 overrides below) */
 h1 { font-size: 40px; }
