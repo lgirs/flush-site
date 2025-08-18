@@ -1,19 +1,15 @@
-{# Renders a centered hero with optional background image, controlled via page front matter. #}
-<section
-  class="hero{% if hero_image %} hero--image{% endif %}"
-  {% if hero_image %}style="background-image:url('{{ hero_image | url }}')" {% endif %}>
-  <div class="container center">
-    {% if not hero_image %}
-      {# Fallback: big logo when no hero image is set #}
-      <span class="logo logo--bg logo--white hero-logo" aria-label="Flush"></span>
-    {% endif %}
-
+<section class="hero" role="region" aria-label="Page hero">
+  <div class="container">
     {% if hero_title %}
-      <h1 class="mt-8">{{ hero_title }}</h1>
+      <h1>{{ hero_title }}</h1>
     {% endif %}
 
     {% if hero_lede %}
       <p class="lede">{{ hero_lede }}</p>
+    {% endif %}
+
+    {% if hero_image %}
+      <img src="{{ hero_image | url }}" alt="{{ hero_image_alt or 'Hero image' }}">
     {% endif %}
   </div>
 </section>
