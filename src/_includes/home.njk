@@ -1,51 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>{% include "partials/head.njk" %}</head>
-<body>
-  <header class="site-header">
-    <div class="container header-row">
-      <a href="{{ '/' | url }}" class="logo" aria-label="Flush">
-        <img class="logo-img" src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush">
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="{{ '/gigs/'   | url }}">Gigs</a>
-        <a href="{{ '/music/'  | url }}">Music</a>
-        <a href="{{ '/videos/' | url }}">Videos</a>
-        <a href="{{ '/about/'  | url }}">About</a>
-      </nav>
+{# src/_includes/home.njk #}
+{% extends "page.njk" %}
+
+{% block main %}
+  {# Hero #}
+  {% if hero_title or hero_lede %}
+  <section class="hero">
+    <div class="container center">
+      {% if hero_title %}<h1>{{ hero_title }}</h1>{% endif %}
+      {% if hero_lede %}<p class="lede">{{ hero_lede }}</p>{% endif %}
     </div>
-  </header>
+  </section>
+  {% endif %}
 
-  <main id="main">
-    {% if hero_title or hero_lede or hero_image %}
-      <section class="hero container">
-        {% if hero_title %}<h1>{{ hero_title }}</h1>{% endif %}
-        {% if hero_lede %}<p class="lede">{{ hero_lede }}</p>{% endif %}
-      </section>
-    {% endif %}
+  {# Body content from index.md #}
+  <div class="content">
+    {{ content | safe }}
+  </div>
 
-    <section class="container content">
-      {{ content | safe }}
-    </section>
+  {# Social placeholder #}
+  <section class="social mt-8">
+    <div class="card pad-8">Social feed placeholder (Facebook / Instagram)</div>
+  </section>
 
-    <section class="container mt-8">
-      <h2 class="center">Latest from Social</h2>
-      <div class="card social mt-8">
-        <div class="social-thumb" aria-hidden="true"></div>
-        <p>Social feed placeholder (Facebook / Instagram)</p>
-      </div>
-    </section>
-
-    <section class="container mt-8">
-      <h2 class="center">Explore by Tags</h2>
-      <div class="tags-block mt-8">
-        {% include "partials/tags.njk" ignore missing %}
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container"><p>&copy; {{ site.name or "Flush" }} {{ site.year or "" }}</p></div>
-  </footer>
-</body>
-</html>
+  {# Tags word‑cloud placeholder #}
+  <section class="tags-block mt-8">
+    {# example hard-coded tags; real tags can come later #}
+    <a class="tag-chip" href="{{ '/tags/rock/' | url }}">rock</a>
+    <a class="tag-chip" href="{{ '/tags/live/' | url }}">live</a>
+    <a class="tag-chip" href="{{ '/tags/video/' | url }}">video</a>
+  </section>
+{% endblock %}
