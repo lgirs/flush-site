@@ -2,6 +2,7 @@
    Flush Site Stylesheet
    Task 1: Tokens & Base
    Task 2: Frame & Utilities
+   Task 3: Header
    ========================================= */
 
 /* ---------- Global Tokens ---------- */
@@ -71,4 +72,37 @@ a:focus {
 
 .center {
   text-align: center;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--color-bg);
+  border-bottom: 1px solid #222;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--gap) 0;
+}
+
+.logo-img {
+  height: 40px;
+  display: block;
+}
+
+.nav a {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-left: 1.5rem;
+  color: var(--color-text);
+}
+
+.nav a:hover,
+.nav a:focus {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
