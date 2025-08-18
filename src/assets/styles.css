@@ -216,3 +216,69 @@ a:hover { color: var(--flush-red); }
   width: auto !important;    /* keep aspect ratio */
   display: block;
 }
+
+/* === Site frame & container lock === */
+:root { --site-max: 1040px; } /* pick your sweet spot: 960–1140 */
+
+.container,
+.site-header .container,
+.site-footer .container,
+.hero > .container,
+.layout { 
+  max-width: var(--site-max) !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+
+/* === Header alignment === */
+.site-header { padding: 16px 0; border-bottom: 1px solid rgba(233,232,241,0.10); }
+.header-row { display: flex; align-items: center; gap: 24px; }
+.header-row .logo { flex: 0 0 auto; }
+.nav { margin-left: auto; display: flex; gap: 20px; font-family: var(--font-head); }
+.site-header .logo-img { height: 40px; width: auto; display: block; } /* tweak to 32/48 if needed */
+
+/* === Hero block polish === */
+.hero {
+  padding: clamp(2.5rem, 6vw, 5rem) 0 !important;
+  background: var(--flush-black);
+  text-align: left;           /* left-align content by default */
+  border-bottom: 1px solid rgba(233,232,241,0.08);
+}
+.hero h1 { margin-bottom: 12px; }
+.hero p.lede { max-width: 60ch; }
+
+/* If you want the hero centered on Home only, add .hero--center to the hero wrapper in index.md front matter logic and keep this: */
+.hero--center { text-align: center; }
+.hero--center .lede { margin-inline: auto; }
+
+/* === Main layout grid === */
+.layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 280px !important; /* content + sidebar */
+  gap: 28px !important;
+  align-items: start !important;
+  margin-top: 28px !important;
+}
+.content { max-width: 72ch; justify-self: center; }
+.sidebar { position: sticky; top: 24px; }
+
+/* Sidebar card sizing stays inside the 280px column */
+.sidebar .card {
+  background: #141212;
+  border: 1px solid rgba(233,232,241,0.12);
+  border-radius: 14px;
+  padding: 20px 20px 16px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr !important; }
+  .content { justify-self: stretch; }
+  .sidebar { position: static; margin-top: 24px; }
+}
+
+/* === Brand text defaults === */
+body, h1, h2, h3, .nav a, .tag { color: var(--flush-gray); }
+.nav a:hover, .tag:hover { color: var(--flush-yellow); border-color: var(--flush-yellow); }
+.tag { border: 1px solid var(--flush-gray); }
