@@ -1,7 +1,7 @@
 {# Sidebar tag list using Eleventy collections object keys. #}
 {% if collections %}
   <div class="card mb-8">
-    <h3 class="mb-4">Explore by tag</h3>
+    <h3 class="mb-4">Explore site content by tags</h3>
     {% for name, items in collections %}
       {% if name != "all" and name != "post" and name != "posts" %}
         <a class="tag" href="{{ '/tags/' | url }}{{ name | slugify }}/">{{ name }}</a>
