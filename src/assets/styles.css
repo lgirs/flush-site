@@ -1,226 +1,53 @@
-/* ==========================================================================
-   Flush – Clean CSS v1
-   - White as default text (#E9E8F1), Yellow as highlight (#FFD447), Black bg (#0F0D0D)
-   - Oswald (700) for nav/titles/tags; Source Sans Pro for body
-   - Deterministic 2-col layout: centered content + fixed right sidebar
-   ========================================================================== */
+/* =========================================
+   Flush Site Stylesheet
+   Task 1: Tokens & Base
+   ========================================= */
 
-/* Fonts (Google Fonts delivery) */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap');
-
-/* ----------------------------
-   Design tokens
------------------------------ */
+/* ---------- Global Tokens ---------- */
 :root {
-  /* Brand colors */
-  --flush-black: #0F0D0D;
-  --flush-white: #E9E8F1;
-  --flush-yellow: #FFD447;
-  --flush-red: #962800;
+  --site-max: 1040px;
+  --pad: 24px;
+  --gap: 28px;
 
-  /* Typography */
-  --font-head: 'Oswald', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --font-body: 'Source Sans Pro', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --color-bg: #0f0d0d;       /* near-black background */
+  --color-text: #ffffff;     /* default body text */
+  --color-accent: #FFD34E;   /* highlight yellow */
 
-  /* Sizes */
-  --site-max: 1040px;    /* frame width — change to 1000/1120 if you prefer */
-  --sidebar-w: 280px;    /* right rail width — change to 300/320 if you prefer */
-  --gap: 28px;           /* column and block gap */
-  --pad: 24px;           /* container side padding */
-
-  /* Type scale */
-  --fs-xxl: clamp(2.5rem, 3.5vw + 1rem, 3.25rem); /* H1 */
-  --fs-xl:  clamp(2rem,   2.5vw + 1rem, 2.5rem);  /* H2 */
-  --fs-lg:  clamp(1.5rem, 1.5vw + 1rem, 2rem);    /* H3 */
-  --fs-md:  1.125rem;
-  --fs-sm:  1rem;
-  --fs-xs:  0.875rem;
-
-  /* Surfaces */
-  --surface: #141212;
-  --line: rgba(233,232,241,0.10);
-  --line-soft: rgba(233,232,241,0.12);
-  --radius: 14px;
+  --font-heading: 'Oswald', sans-serif;
+  --font-body: 'Source Sans Pro', sans-serif;
 }
 
-/* ----------------------------
-   Base / Reset
------------------------------ */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+/* ---------- Base / Reset ---------- */
+html,
 body {
   margin: 0;
-  background: var(--flush-black);
-  color: var(--flush-white);
-  font: var(--fs-sm)/1.6 var(--font-body);
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-img { max-width: 100%; height: auto; display: block; }
-a {
-  color: var(--flush-yellow);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-a:hover { color: var(--flush-red); }
-:focus-visible { outline: 3px solid var(--flush-yellow); outline-offset: 2px; }
-
-/* ----------------------------
-   Containers & Utilities
------------------------------ */
-.container { max-width: var(--site-max); margin: 0 auto; padding: 0 var(--pad); }
-.center { text-align: center; }
-.mt-8 { margin-top: var(--gap); }
-.mb-8 { margin-bottom: var(--gap); }
-
-/* ----------------------------
-   Typography
------------------------------ */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-head);
-  text-transform: uppercase;
-  letter-spacing: .02em;
-  margin: 0 0 12px;
-}
-h1 { font-size: var(--fs-xxl); }
-h2 { font-size: var(--fs-xl); }
-h3 { font-size: var(--fs-lg); }
-.lede { font-size: var(--fs-md); opacity: .95; max-width: 60ch; }
-.mark { background: linear-gradient(transparent 60%, rgba(255,212,71,.35) 0); }
-
-/* ----------------------------
-   Header
------------------------------ */
-.site-header {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--line);
 }
 
-/* Constrain the actual header row that appears as: <div class="container header-row"> */
-.header-row {
-  max-width: var(--site-max);
-  margin: 0 auto;
-  padding: 0 var(--pad);
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* logo left, nav right within the same frame */
-  gap: 20px;
-}
-
-.site-header .logo-img {
-  height: 40px;
-  width: auto;
+img {
+  max-width: 100%;
+  height: auto;
   display: block;
 }
 
-.nav {
-  display: flex;
-  gap: 20px;
-  font-family: var(--font-head);
-  text-transform: uppercase;
-}
-.nav a { color: var(--flush-white); }
-.nav a:hover { color: var(--flush-yellow); }
-
-
-/* ----------------------------
-   Hero
------------------------------ */
-.hero {
-  padding: clamp(2.5rem, 6vw, 4.5rem) 0;
-  border-bottom: 1px solid var(--line);
-  background: var(--flush-black);
-  text-align: left;
-}
-.hero > .container { /* ensures same frame as header & main */ }
-.hero h1 { margin-bottom: 12px; }
-.hero p.lede { margin: 0; }
-
-/* Optional variants if you want: add class 'hero--center' in template */
-.hero--center { text-align: center; }
-.hero--center .lede { margin-inline: auto; }
-
-/* If a background image is used via inline style */
-.hero--image { background-size: cover; background-position: center; position: relative; }
-.hero--image::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(15,13,13,.55), rgba(15,13,13,.85));
-}
-.hero--image > .container { position: relative; z-index: 1; }
-
-/* ----------------------------
-   Main 2-column Layout
------------------------------ */
-.layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--sidebar-w); /* content | sidebar */
-  gap: var(--gap);
-  align-items: start;
-  margin-top: var(--gap);
-}
-.content { max-width: 72ch; justify-self: center; }
-.sidebar { position: sticky; top: 24px; align-self: start; }
-
-/* Sidebar cards */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--line-soft);
-  border-radius: var(--radius);
-  padding: 20px;
-}
-.card + .card { margin-top: var(--gap); }
-
-/* ----------------------------
-   Tags (right rail + inline)
------------------------------ */
-.tag {
-  display: inline-block;
-  font-family: var(--font-head);
-  text-transform: uppercase;
-  font-size: .85rem;
-  color: var(--flush-white);
-  border: 1px solid var(--flush-white);
-  border-radius: 999px;
-  padding: .25rem .5rem;
-  margin: 0 .5rem .5rem 0;
-}
-.tag:hover {
-  background: rgba(255,255,255,.08);
-  color: var(--flush-yellow);
-  border-color: var(--flush-yellow);
+/* ---------- Links ---------- */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
 }
 
-/* ----------------------------
-   Social placeholder (Home)
------------------------------ */
-.social-placeholder {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 12px;
-  align-items: start;
-}
-.social-thumb {
-  width: 72px; height: 72px;
-  background: #222;
-  border: 1px solid rgba(233,232,241,.2);
-  border-radius: 8px;
+a:hover,
+a:focus {
+  text-decoration: underline;
 }
 
-/* ----------------------------
-   Footer
------------------------------ */
-.site-footer {
-  padding: 24px 0;
-  border-top: 1px solid var(--line);
-  text-align: center;
-}
-.site-footer p { margin: 0; }
-
-/* ----------------------------
-   Responsive
------------------------------ */
-@media (max-width: 960px) {
-  .layout { grid-template-columns: 1fr; }
-  .content { justify-self: stretch; }
-  .sidebar { position: static; margin-top: var(--gap); }
+a:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
