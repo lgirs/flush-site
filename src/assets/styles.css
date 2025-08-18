@@ -66,18 +66,35 @@ a:focus { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .center { text-align: center; }
 
 /* ---------- Header ---------- */
-.site-header { background: var(--color-bg); border-bottom: 1px solid #222; }
-.header-row { display: flex; justify-content: space-between; align-items: center; padding: var(--gap) 0; }
-.logo-img { height: 40px; display: block; }
+.site-header { background: var(--color-bg); border-bottom: 1px solid #222; padding: 0; }
+
+/* Constrain whichever header row you render:
+   <div class="container header-row">… or <div class="header-row">… */
+.site-header > .container.header-row,
+.site-header > .header-row {
+  max-width: var(--site-max);
+  margin: 0 auto;
+  padding: var(--gap) var(--pad);               /* horizontal pad matches .container */
+  display: flex;
+  justify-content: space-between;               /* logo left, nav right within frame */
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-img { height: 40px; width: auto; display: block; }
+
+/* Use gap on the nav container instead of left-margins on each link */
+.nav { display: flex; gap: 1.5rem; }
 .nav a {
   font-family: var(--font-heading);
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-left: 1.5rem;
+  margin: 0;                                   /* remove per-link margin to avoid double spacing */
   color: var(--color-text);
 }
 .nav a:hover, .nav a:focus { color: var(--color-accent); text-decoration: underline; }
+
 
 /* ---------- Hero ---------- */
 .hero { padding: calc(var(--gap) * 2) 0; background: var(--color-bg); text-align: center; }
