@@ -1,7 +1,12 @@
-export default function(eleventyConfig) {
+// .eleventy.js
+export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+
   return {
-    dir: { input: "src", includes: "_includes", output: "_site" },
-    passthroughFileCopy: true
+    dir: {
+      input: "src",
+      includes: "_includes",
+      output: "_site",
+    },
   };
 }
