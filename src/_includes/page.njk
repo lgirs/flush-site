@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title or site.name }}</title>
+  <link href="{{ '/assets/styles.css' | url }}" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="{{ '/' | url }}" class="logo" aria-label="Flush">
+        <img src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush" class="logo-img">
+      </a>
+      <nav class="nav">
+        <a href="{{ '/gigs/' | url }}">Gigs</a>
+        <a href="{{ '/music/' | url }}">Music</a>
+        <a href="{{ '/videos/' | url }}">Videos</a>
+        <a href="{{ '/about/' | url }}">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container layout">
+      <section class="content">
+        {{ content | safe }}
+      </section>
+
+      <aside class="sidebar">
+        {% include "partials/tags.njk" ignore missing %}
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; {{ site.name }} {{ site.year }}</p>
+    </div>
+  </footer>
+</body>
+</html>
