@@ -1,7 +1,7 @@
 ---
 layout: home.njk
-title: Welcome Friend
-hero_title: Welcome Friend
-hero_lede: This is the Flush community home
+title: We are Flush
+hero_title: Your are Flush
+hero_lede: We are all Flush
 ---
-Your intro/body text here.
+Let's be fucked.
