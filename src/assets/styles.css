@@ -7,6 +7,7 @@
    Task 5: Main Content
    Task 6: Tag Chips
    Task 7: Footer
+   Task 8: Accessibility
    ========================================= */
 
 /* ---------- Global Tokens ---------- */
@@ -207,4 +208,20 @@ main {
 .site-footer a:hover,
 .site-footer a:focus {
   text-decoration: underline;
+}
+
+/* ---------- Accessibility ---------- */
+a:focus,
+.tag-chip:focus,
+.nav a:focus,
+.site-footer a:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
