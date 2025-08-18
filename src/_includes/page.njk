@@ -1,33 +1,32 @@
-<!DOCTYPE html>
+{# src/_includes/page.njk #}
+<!doctype html>
 <html lang="en">
-<head>{% include "partials/head.njk" %}</head>
+<head>
+  {% include "partials/head.njk" %}
+</head>
 <body>
   <header class="site-header">
     <div class="container header-row">
-      <a href="{{ '/' | url }}" class="logo" aria-label="Flush">
+      <a href="{{ '/' | url }}" class="logo">
         <img class="logo-img" src="{{ '/assets/images/logo-flush-white.png' | url }}" alt="Flush">
       </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="{{ '/gigs/'   | url }}">Gigs</a>
-        <a href="{{ '/music/'  | url }}">Music</a>
+      <nav class="nav">
+        <a href="{{ '/gigs/' | url }}">Gigs</a>
+        <a href="{{ '/music/' | url }}">Music</a>
         <a href="{{ '/videos/' | url }}">Videos</a>
-        <a href="{{ '/about/'  | url }}">About</a>
+        <a href="{{ '/about/' | url }}">About</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="container content">{{ content | safe }}</section>
-    <section class="container mt-8">
-      <h2 class="center">Explore by Tags</h2>
-      <div class="tags-block mt-8">
-        {% include "partials/tags.njk" ignore missing %}
-      </div>
-    </section>
+    <div class="container">
+      {% block main %}{{ content | safe }}{% endblock %}
+    </div>
   </main>
 
   <footer class="site-footer">
-    <div class="container"><p>&copy; {{ site.name or "Flush" }} {{ site.year or "" }}</p></div>
+    <div class="container">© Flush</div>
   </footer>
 </body>
 </html>
