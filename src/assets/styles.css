@@ -202,3 +202,10 @@ a:hover { color: var(--flush-red); }
   .content { justify-self: stretch; }
   .sidebar { position: static; margin-top: 24px; }
 }
+
+/* === Hero Logo Sizing Override === */
+.hero-logo {
+  width: clamp(160px, 20vw, 240px) !important;
+  margin-inline: auto;
+  display: block;
+}
