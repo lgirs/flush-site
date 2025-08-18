@@ -4,6 +4,7 @@
    Task 2: Frame & Utilities
    Task 3: Header
    Task 4: Hero
+   Task 5: Main Content
    ========================================= */
 
 /* ---------- Global Tokens ---------- */
@@ -135,4 +136,22 @@ a:focus {
   margin-top: var(--gap);
   max-width: 100%;
   height: auto;
+}
+
+/* ---------- Main Content ---------- */
+main {
+  padding: calc(var(--gap) * 2) 0;
+}
+
+.content {
+  max-width: 72ch;
+  margin: 0 auto;
+}
+
+.social {
+  margin-top: var(--gap);
+}
+
+.tags-block {
+  margin-top: var(--gap);
 }
