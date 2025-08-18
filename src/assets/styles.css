@@ -1,62 +1,45 @@
 /*
-  Flush Web Style (CSS) v1.0
-  Purpose: Base variables, typography, colors, layout primitives, buttons, links,
-  logo & Gorgo helpers, and accessibility defaults.
-
-  Notes:
-  - Awakenings is IMAGE-ONLY (logo). Do not use as a font.
-  - Image paths set to /assets/images/... (match repo path: src/assets/images/*)
+  Flush Web Style (CSS) v2.0
+  Brand: Flush
+  Purpose: Base variables, typography, colors, layout primitives, nav, hero, sidebar, tags.
 */
 
 /* --------------------------------------------------
-   1) Font imports (keep simple; OK alongside self-hosted Oswald)
+   Fonts (Google Fonts only)
 -------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap');
 
 /* --------------------------------------------------
-   2) Design tokens (CSS variables)
+   Design tokens
 -------------------------------------------------- */
 :root {
-  /* Colors */
-  --flush-black: #0f0d0d;           /* Primary background */
-  --flush-red: #962800;             /* Burnt red accent (avoid for small text on dark) */
-  --flush-yellow: #FFD447;          /* Muted acid yellow (CTA, highlights) */
-  --flush-gray: #e9e8f1;            /* Light gray for body text on dark */
+  --flush-black: #0f0d0d;
+  --flush-red: #962800;
+  --flush-yellow: #FFD447;
+  --flush-gray: #e9e8f1;
 
-  /* Typography */
-  --font-head: 'Oswald', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --font-body: 'Source Sans Pro', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-head: 'Oswald', system-ui, sans-serif;
+  --font-body: 'Source Sans Pro', system-ui, sans-serif;
 
-  /* Sizing scale */
-  --fs-xxl: clamp(2.5rem, 3.5vw + 1rem, 3.25rem);  /* H1 */
-  --fs-xl:  clamp(2rem, 2.5vw + 1rem, 2.5rem);     /* H2 */
-  --fs-lg:  clamp(1.5rem, 1.5vw + 1rem, 2rem);     /* H3 */
-  --fs-md:  1.125rem;                               /* Body large */
-  --fs-sm:  1rem;                                   /* Body */
-  --fs-xs:  0.875rem;                               /* Small */
+  --fs-xxl: clamp(2.5rem, 3.5vw + 1rem, 3.25rem);
+  --fs-xl:  clamp(2rem, 2.5vw + 1rem, 2.5rem);
+  --fs-lg:  clamp(1.5rem, 1.5vw + 1rem, 2rem);
+  --fs-md:  1.125rem;
+  --fs-sm:  1rem;
+  --fs-xs:  0.875rem;
 
-  /* Layout */
-  --container-max: 1120px;
   --space-4: 1rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --radius-lg: 14px;
   --shadow-soft: 0 8px 24px rgba(0,0,0,0.3);
-
-  /* Assets (point to repo paths) */
-  --logo-white: url('/assets/images/logo-flush-white.png');
-  --logo-black: url('/assets/images/logo-flush-black.png');
-  --logo-white-on-black: url('/assets/images/logo-flush-white-black_vex.png');
-  --logo-white-on-orange: url('/assets/images/logo-flush-white-orange_vex.png');
-  --gorgo-url: url('/assets/images/Gorgo-1.png'); /* swap per variation */
 }
 
 /* --------------------------------------------------
-   3) Base / Reset
+   Reset / Base
 -------------------------------------------------- */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
-html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--flush-black);
@@ -64,277 +47,103 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-sm);
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 img { max-width: 100%; height: auto; display: block; }
 
-/* Containers */
-.container { width: min(100% - 10vw, var(--container-max)); margin-inline: auto; }
-.section { padding: var(--space-8) 0; }
-
 /* --------------------------------------------------
-   4) Typography
+   Typography
 -------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-head);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
   margin: 0 0 var(--space-4);
 }
-h1 { font-size: var(--fs-xxl); color: var(--flush-yellow); }
-h2 { font-size: var(--fs-xl);  color: var(--flush-red); }
-h3 { font-size: var(--fs-lg);  color: var(--flush-yellow); }
+h1 { font-size: var(--fs-xxl); color: var(--flush-gray); }
+h2 { font-size: var(--fs-xl);  color: var(--flush-gray); }
+h3 { font-size: var(--fs-lg);  color: var(--flush-gray); }
 
-p { margin: 0 0 var(--space-6); font-size: var(--fs-sm); }
-.lede { font-size: var(--fs-md); color: var(--flush-gray); opacity: 0.95; }
-.small { font-size: var(--fs-xs); opacity: 0.9; }
+p { margin: 0 0 var(--space-6); }
+.lede { font-size: var(--fs-md); opacity: 0.95; }
 
-/* Accents and highlights inside copy */
-.mark { background: linear-gradient(transparent 60%, rgba(255,212,71,0.35) 0); }
-.emph { color: var(--flush-yellow); font-weight: 600; }
-
-/* Pull quotes */
-.quote {
-  font-family: var(--font-head);
-  font-size: var(--fs-lg);
-  color: var(--flush-yellow);
-  border-left: 4px solid var(--flush-red);
-  padding-left: var(--space-6);
-  margin: var(--space-8) 0;
-}
-
-/* --------------------------------------------------
-   5) Links & Buttons
--------------------------------------------------- */
-a { color: var(--flush-yellow); text-underline-offset: 3px; }
+/* Highlights */
+a { color: var(--flush-yellow); text-decoration: underline; text-underline-offset: 3px; }
 a:hover { color: var(--flush-red); }
-
-.button,
-.btn {
-  display: inline-block;
-  padding: 0.75rem 1.1rem;
-  border-radius: var(--radius-lg);
-  font-family: var(--font-head);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  border: 2px solid transparent;
-  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, color 120ms ease;
-}
-.btn-primary { background: var(--flush-yellow); color: #000; }
-.btn-primary:hover { background: #ffe17b; transform: translateY(-1px); box-shadow: var(--shadow-soft); }
-
-.btn-ghost { background: transparent; color: var(--flush-yellow); border-color: var(--flush-yellow); }
-.btn-ghost:hover { background: rgba(255,212,71,0.12); }
+.mark { background: linear-gradient(transparent 60%, rgba(255,212,71,0.35) 0); }
 
 /* --------------------------------------------------
-   6) Cards / Surfaces
+   Layout
 -------------------------------------------------- */
-.card {
-  background: #141212; /* slightly lighter than base to separate */
-  border: 1px solid rgba(233,232,241,0.06);
-  border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  box-shadow: var(--shadow-soft);
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.site-header { padding: var(--space-4) 0; border-bottom: 1px solid rgba(233,232,241,0.1); }
+.site-footer { padding: var(--space-6) 0; border-top: 1px solid rgba(233,232,241,0.1); text-align:center; }
+.site-footer p { margin: 0; }
+
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
+.nav { display: flex; gap: var(--space-6); font-family: var(--font-head); }
+.nav a { color: var(--flush-gray); text-transform: uppercase; font-size: var(--fs-sm); }
+.nav a:hover { color: var(--flush-yellow); }
+
+/* Two-column layout for content pages */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--space-8);
+  align-items: start;
+  margin-top: var(--space-8);
+}
+.content { max-width: 72ch; }
+.sidebar .card { background: #141212; padding: var(--space-6); border-radius: var(--radius-lg); margin-bottom: var(--space-6); }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { order: 2; margin-top: var(--space-8); }
+  .content { order: 1; }
 }
 
 /* --------------------------------------------------
-   7) Logo helpers (Awakenings as image only)
--------------------------------------------------- */
-.logo {
-  display: inline-block;
-  width: min(280px, 60vw);
-  min-width: 200px; /* brand minimum */
-}
-.logo--white { background-image: var(--logo-white); }
-.logo--black { background-image: var(--logo-black); }
-.logo--on-black { background-image: var(--logo-white-on-black); }
-.logo--on-orange { background-image: var(--logo-white-on-orange); }
-.logo--bg {
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: left center;
-  aspect-ratio: 5 / 1; /* adjust if needed */
-}
-.logo--tilt { transform: rotate(5deg); transform-origin: left bottom; }
-
-/* Example:
-<span class="logo logo--bg logo--white logo--tilt" aria-label="Flush"></span>
-*/
-
-/* --------------------------------------------------
-   8) Gorgo helpers (swap URL per variation)
--------------------------------------------------- */
-.gorgo {
-  --gorgo-size: 120px;
-  width: var(--gorgo-size);
-  height: var(--gorgo-size);
-  background-image: var(--gorgo-url);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter: contrast(110%) saturate(105%);
-}
-.gorgo--badge { border: 2px dashed var(--flush-red); border-radius: 50%; padding: 6px; }
-.gorgo--tilt { transform: rotate(-5deg); }
-.gorgo--shadow { box-shadow: var(--shadow-soft); }
-
-/* Utility to quickly assign a specific Gorgo asset:
-   .gorgo--v2 { background-image: url('/assets/images/Gorgo-2.png'); }
-*/
-
-/* --------------------------------------------------
-   9) Hero sections
+   Hero
 -------------------------------------------------- */
 .hero {
   position: relative;
-  padding: clamp(4rem, 7vw, 8rem) 0;
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  text-align: center;
   background: var(--flush-black);
 }
-.hero--image {
-  background-size: cover;
-  background-position: center;
-}
-.hero::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(15,13,13,0.65), rgba(15,13,13,0.85));
-  pointer-events: none;
+.hero--image { background-size: cover; background-position: center; }
+.hero--image::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15,13,13,0.55), rgba(15,13,13,0.85));
 }
 .hero > .container { position: relative; z-index: 1; }
-.hero h1 { color: var(--flush-yellow); }
-.hero p.lede { max-width: 58ch; }
+.hero h1 { color: var(--flush-gray); }
+.hero p.lede { max-width: 58ch; margin-inline:auto; }
 
 /* --------------------------------------------------
-   10) Tags / Chips
+   Tags
 -------------------------------------------------- */
 .tag {
   display: inline-block;
   font-family: var(--font-head);
   font-size: 0.85rem;
   text-transform: uppercase;
-  color: var(--flush-yellow);
-  border: 1.5px solid var(--flush-yellow);
+  color: var(--flush-gray);
+  border: 1px solid var(--flush-gray);
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
   margin: 0 0.5rem 0.5rem 0;
 }
-.tag--alt { color: var(--flush-red); border-color: var(--flush-red); }
+.tag:hover { background: rgba(255,255,255,0.1); }
 
 /* --------------------------------------------------
-   11) Accessibility & Motion
+   Social placeholder
 -------------------------------------------------- */
-:focus-visible { outline: 3px solid var(--flush-yellow); outline-offset: 2px; }
-
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
-
-/* Ensure small text uses safe contrast */
-.small, .meta { color: color-mix(in srgb, var(--flush-gray) 92%, white 8%); }
+.social-placeholder { display: grid; grid-template-columns: 72px 1fr; gap: var(--space-4); align-items: start; }
+.social-thumb { width: 72px; height: 72px; background: #222; border: 1px solid rgba(233,232,241,0.2); border-radius: 8px; }
 
 /* --------------------------------------------------
-   12) Utilities
+   Utilities
 -------------------------------------------------- */
 .center { text-align: center; }
-.mt-0 { margin-top: 0; }
-.mb-0 { margin-bottom: 0; }
-.mt-4 { margin-top: var(--space-4); }
-.mb-4 { margin-bottom: var(--space-4); }
 .mt-8 { margin-top: var(--space-8); }
 .mb-8 { margin-bottom: var(--space-8); }
-.pad-4 { padding: var(--space-4); }
-.pad-8 { padding: var(--space-8); }
-
-/* --------------------------------------------------
-   13) Example dark section alt background
--------------------------------------------------- */
-.section-alt {
-  background: #151313;
-  border-top: 1px solid rgba(233,232,241,0.06);
-  border-bottom: 1px solid rgba(233,232,241,0.06);
-}
-/* ===== Layout alignment & spacing tidy-up ===== */
-
-/* ===== Layout & Components — consolidated (v1.1) ===== */
-
-/* Header + Footer use container for consistent edges */
-.site-header { padding: var(--space-4) 0; border-bottom: 1px solid rgba(233,232,241,0.06); }
-.site-footer { padding: var(--space-6) 0; border-top: 1px solid rgba(233,232,241,0.06); }
-.site-footer p { margin: 0; }
-
-/* Header row: logo left, nav right */
-.header-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
-
-/* Simple nav */
-.nav { display: flex; gap: var(--space-6); align-items: center; }
-.nav a { color: var(--flush-yellow); text-decoration: underline; text-underline-offset: 3px; }
-.nav a:hover { color: var(--flush-red); }
-
-/* Logo sizing (header + hero) */
-.logo.logo--bg {
-  display: block;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
-  width: clamp(160px, 20vw, 240px);
-  aspect-ratio: 5 / 1;
-}
-.hero-logo { width: clamp(200px, 30vw, 360px); margin-inline: auto; display: block; }
-
-/* Main spacing so H1 isn't glued to header */
-main { padding: var(--space-8) 0; }
-
-/* === Two-column main layout (sidebar + content) === */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; } /* keep one definition */
-.layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;   /* sidebar width + flexible content */
-  gap: 32px;
-  align-items: start;
-  margin-top: 32px;
-}
-.sidebar .card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
-  padding: 20px 20px 16px;
-  margin-bottom: 24px;
-}
-.content { max-width: 72ch; } /* good reading width */
-.content > *:first-child { margin-top: 0; }
-.content h1, .content h2, .content h3 { line-height: 1.1; margin-top: 24px; margin-bottom: 12px; }
-
-@media (max-width: 960px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { order: 2; margin-top: var(--space-8); }
-  .content { order: 1; }
-}
-
-/* === Hero (single source of truth) === */
-.hero {
-  position: relative;
-  padding: clamp(3rem, 6vw, 6rem) 0;
-  background: var(--flush-black);
-  text-align: center;
-  margin-top: 24px;
-  margin-bottom: 8px;
-}
-.hero--image { background-size: cover; background-position: center; }
-.hero--image::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(15,13,13,0.55), rgba(15,13,13,0.85));
-  pointer-events: none;
-}
-.hero > .container { position: relative; z-index: 1; }
-.hero h1 { color: var(--flush-yellow); margin-top: var(--space-4); }
-.hero p.lede { max-width: 58ch; margin-inline: auto; color: var(--flush-gray); }
-
-/* === Social placeholder (kept minimal) === */
-.social-placeholder { display: grid; grid-template-columns: 72px 1fr; gap: var(--space-4); align-items: start; }
-.social-thumb { width: 72px; height: 72px; background: #222; border: 1px solid rgba(233,232,241,0.12); border-radius: 8px; }
-
-/* Card spacing consistency */
-.card + .card { margin-top: var(--space-8); }
-
